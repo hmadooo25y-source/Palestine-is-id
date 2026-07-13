@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدخال البيانات</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        * { box-sizing: border-box; font-family: 'Cairo', Arial, sans-serif; }
+        body { background-color: #f1f5f9; margin: 0; padding: 10px; color: #1e293b; }
+        .container { max-width: 1100px; margin: 0 auto; background: #ffffff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 15px; }
+        .editor-layout { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media(min-width: 900px) { .editor-layout { grid-template-columns: 280px 1fr; } }
+        .control-panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; }
+        .control-group { margin-bottom: 15px; }
+        .control-group label { display: block; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        .control-group input[type="range"] { width: 100%; accent-color: #2e7d32; }
+        .nudge-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 150px; margin: 15px auto; }
+        .nudge-btn { background-color: #cbd5e1; border: none; border-radius: 6px; padding: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .draggable { position: absolute; cursor: move; user-select: none; padding: 1px 4px; border: 1px dashed transparent; }
+        .ar-element { font-family: 'Arial', sans-serif; font-weight: bold; }
+        .he-element { font-family: 'Arial Hebrew', 'Arial', sans-serif; font-weight: bold; }
+        .draggable.selected { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.1); z-index: 999; }
+        .workspace-container { width: 100%; overflow-x: auto; background: #e2e8f0; padding: 15px; border-radius: 12px; }
+    </style>
+    </head>
+<body>
+    <div class="container">
+        <h1>إدخال بيانات الهوية</h1>
+        <form id="dataForm">
+            <input type="text" id="id-number" value="406064576" placeholder="رقم الهوية"><br><br>
+            <input type="text" id="first-name-ar" value="مروة" placeholder="الاسم الشخصي (عربي)"><br>
+            <input type="text" id="first-name-he" value="מרוה" placeholder="الاسم الشخصي (عبري)"><br><br>
+            <button type="submit">حفظ والبدء بالتصميم</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            localStorage.setItem('pal_id_data', JSON.stringify({ 
+                idNumber: document.getElementById('id-number').value,
+                firstNameAr: document.getElementById('first-name-ar').value,
+                firstNameHe: document.getElementById('first-name-he').value
+            }));
+            window.location.href = 'front.html';
+        });
+    </script>
+</body>
+</html>
